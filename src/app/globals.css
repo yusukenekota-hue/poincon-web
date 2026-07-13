@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  --color-email: #f4f3ec;
+  --color-email-deep: #ebe9df;
+  --color-cobalt: #24457e;
+  --color-cobalt-ink: #1a2f55;
+  --color-cobalt-pale: #dce3f0;
+  --color-biscuit: #b79878;
+  --color-gold: #9a7b2d;
+  --color-gold-pale: #f1e8ce;
+  --color-paper: #fdfcf9;
+  --color-line: #d8d5c8;
+  --color-warn: #8c3b2e;
+  --font-shippori: "Shippori Mincho";
+}
+
+@theme inline {
+  --color-email: var(--color-email);
+  --color-email-deep: var(--color-email-deep);
+  --color-cobalt: var(--color-cobalt);
+  --color-cobalt-ink: var(--color-cobalt-ink);
+  --color-cobalt-pale: var(--color-cobalt-pale);
+  --color-biscuit: var(--color-biscuit);
+  --color-gold: var(--color-gold);
+  --color-gold-pale: var(--color-gold-pale);
+  --color-paper: var(--color-paper);
+  --color-line: var(--color-line);
+  --color-warn: var(--color-warn);
+  --font-display: var(--font-shippori), var(--font-marcellus), serif;
+  --font-latin: var(--font-marcellus), serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+
+body {
+  background: var(--color-email);
+  color: var(--color-cobalt-ink);
+  font-family: var(--font-body);
+}
