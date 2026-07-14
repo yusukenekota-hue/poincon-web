@@ -124,3 +124,18 @@ create policy "anyone can create a report" on reports for insert with check (tru
 create policy "users can view own ai_usage" on ai_usage for select using (user_id = auth.uid());
 create policy "users can upsert own ai_usage" on ai_usage for insert with check (user_id = auth.uid());
 create policy "users can update own ai_usage" on ai_usage for update using (user_id = auth.uid());
+
+-- ================= Storage（投稿写真） =================
+-- バケットは公開読み取り。書き込みは本人のフォルダ(自分のuser_id配下)のみ許可。
+insert into storage.buckets (id, name, public)
+values ('contributions', 'contributions', true)
+on conflict (id) do nothing;
+
+create policy "contribution photos are public" on storage.objects
+  for select using (bucket_id = 'contributions');
+
+create policy "users can upload to their own folder" on storage.objects
+  for insert with check (
+    bucket_id = 'contributions'
+    and (storage.foldername(name))[1] = auth.uid()::text
+  );

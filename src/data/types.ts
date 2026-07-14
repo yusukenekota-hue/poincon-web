@@ -41,3 +41,29 @@ export interface Shop {
   link: string;
   published: boolean;
 }
+
+export interface Profile {
+  id: string;
+  username: string;
+  display_name: string;
+  region: string | null;
+  approved_count: number;
+  created_at: string;
+}
+
+export type ContributionStatus = "pending" | "approved" | "rejected";
+
+export interface Contribution {
+  id: string;
+  user_id: string;
+  maker_name: string;
+  label: string;
+  period: string;
+  style: string | null;
+  description: string | null;
+  photo_mark_url: string;
+  photo_piece_url: string | null;
+  status: ContributionStatus;
+  created_at: string;
+}
+
