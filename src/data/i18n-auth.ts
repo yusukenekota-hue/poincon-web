@@ -12,6 +12,11 @@ interface AuthDict {
   loginSending: string;
   loginSent: string;
   loginError: string;
+  otpPrompt: string;
+  otpPh: string;
+  otpVerify: string;
+  otpVerifying: string;
+  otpError: string;
 
   regTitle: string;
   regIntro: string;
@@ -81,6 +86,11 @@ export const A: Record<Lang, AuthDict> = {
     loginSending: "送信中…",
     loginSent: "メールを送りました。届いたリンクを開いてログインを完了してください。",
     loginError: "送信に失敗しました。もう一度お試しください。",
+    otpPrompt: "メールに届いた6桁の数字を入力してください。",
+    otpPh: "6桁の数字",
+    otpVerify: "ログインする",
+    otpVerifying: "確認中…",
+    otpError: "コードが正しくないか、期限切れです。もう一度お試しください。",
 
     regTitle: "プロフィールを作成",
     regIntro: "投稿とコレクションに使うプロフィールを作りましょう。",
@@ -148,6 +158,11 @@ export const A: Record<Lang, AuthDict> = {
     loginSending: "Envoi…",
     loginSent: "E-mail envoyé. Ouvrez le lien reçu pour terminer la connexion.",
     loginError: "Échec de l'envoi. Réessayez.",
+    otpPrompt: "Saisissez le code à 6 chiffres reçu par e-mail.",
+    otpPh: "Code à 6 chiffres",
+    otpVerify: "Se connecter",
+    otpVerifying: "Vérification…",
+    otpError: "Code incorrect ou expiré. Réessayez.",
 
     regTitle: "Créer un profil",
     regIntro: "Un profil pour contribuer et gérer votre collection.",
@@ -215,6 +230,11 @@ export const A: Record<Lang, AuthDict> = {
     loginSending: "Sending…",
     loginSent: "Email sent. Open the link to finish signing in.",
     loginError: "Failed to send. Please try again.",
+    otpPrompt: "Enter the 6-digit code from the email.",
+    otpPh: "6-digit code",
+    otpVerify: "Sign in",
+    otpVerifying: "Verifying…",
+    otpError: "Wrong or expired code. Please try again.",
 
     regTitle: "Create a profile",
     regIntro: "A profile to contribute and manage your collection.",

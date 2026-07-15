@@ -29,7 +29,9 @@ export default function LoginForm({ lang, next }: { lang: Lang; next: string }) 
   }
 
   if (status === "sent") {
-    return <p className="text-lg text-cobalt-ink leading-loose text-center">{t.loginSent}</p>;
+    return (
+      <p className="text-lg text-cobalt-ink leading-loose text-center">{t.loginSent}</p>
+    );
   }
 
   return (
@@ -49,7 +51,7 @@ export default function LoginForm({ lang, next }: { lang: Lang; next: string }) 
       >
         {status === "sending" ? t.loginSending : t.loginSend}
       </button>
-      {status === "error" && <p className="text-warn text-base">{t.loginError}</p>}
+      {status === "error" && <p className="text-warn text-base text-center">{t.loginError}</p>}
     </form>
   );
 }
