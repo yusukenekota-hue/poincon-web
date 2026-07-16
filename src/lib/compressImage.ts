@@ -1,9 +1,33 @@
-/* v4の compressImage をそのまま移植。最大800px/JPEG品質0.68、大きすぎる場合は段階的に落とす。 */
-export function compressImage(
+/* v4の compressImage をそのまま移植。最大800px/JPEG品質0.68、大きすぎる場合は段階的に落とす。
+   iPhoneのHEIC/HEIF写真は、ブラウザのcanvasが読めないため先にJPEGへ変換する。 */
+
+function isHeic(file: File): boolean {
+  return (
+    /image\/hei[cf]/i.test(file.type) ||
+    /\.hei[cf]$/i.test(file.name)
+  );
+}
+
+/* HEICならJPEGのBlobへ変換して返す。それ以外はそのまま。
+   heic2anyは約1MBあるため、HEICが来たときだけ動的に読み込む。 */
+async function toDecodableBlob(file: File): Promise<Blob> {
+  if (!isHeic(file)) return file;
+  const heic2any = (await import("heic2any")).default;
+  const converted = await heic2any({
+    blob: file,
+    toType: "image/jpeg",
+    quality: 0.85,
+  });
+  return Array.isArray(converted) ? converted[0] : converted;
+}
+
+export async function compressImage(
   file: File,
   maxDim = 800,
   quality = 0.68
 ): Promise<string> {
+  const blob = await toDecodableBlob(file);
+
   const render = (img: HTMLImageElement, dim: number, q: number) => {
     const scale = Math.min(1, dim / Math.max(img.width, img.height));
     const canvas = document.createElement("canvas");
@@ -27,7 +51,7 @@ export function compressImage(
       img.src = reader.result as string;
     };
     reader.onerror = () => reject(new Error("file read failed"));
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(blob);
   });
 }
 
